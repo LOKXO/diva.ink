@@ -84,9 +84,35 @@
       to { opacity: 0; }
     }
 
+    .logo-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+
+    .logo-container.show {
+      opacity: 1;
+    }
+
+    .logo-container.move {
+      top: 20px;
+      left: 20px;
+      transform: translate(0, 0);
+    }
+
+    .logo-container img {
+      max-width: 100px;
+      height: auto;
+    }
+
     .main-content {
       opacity: 0;
       transition: opacity 1s ease-in;
+      padding-top: 120px; /* Add space for the logo */
     }
 
     h1 {
@@ -94,6 +120,11 @@
       font-weight: 700;
       color: var(--primary-color);
       font-size: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    h1:hover {
+      transform: scale(1.05);
     }
 
     .mission-statement {
@@ -106,6 +137,12 @@
       padding: 2rem;
       border-radius: 0.75rem;
       box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mission-statement:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     }
 
     .stats {
@@ -126,6 +163,36 @@
       color: var(--text-color);
       flex: 1;
       min-width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .stat::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat:hover::before {
+      opacity: 1;
+      animation: shine 1.5s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .stat span {
@@ -133,6 +200,31 @@
       color: var(--secondary-color);
       display: block;
       margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 2rem;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
+      background-color: #3a80d2;
+    }
+
+    .cta-button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
     }
 
     @media (max-width: 768px) {
@@ -170,6 +262,10 @@
     </div>
   </div>
 
+  <div class="logo-container">
+    <img src="hi.png" alt="Logo">
+  </div>
+
   <div class="main-content">
     <h1>Welcome to Our Design Studio</h1>
 
@@ -192,12 +288,15 @@
         <p>Happy Customers</p>
       </div>
     </div>
+
+    <a href="#" class="cta-button">Get Started</a>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       const overlay = document.querySelector('.overlay');
       const mainContent = document.querySelector('.main-content');
+      const logoContainer = document.querySelector('.logo-container');
       
       setTimeout(() => {
         overlay.classList.add('fade-out');
@@ -206,7 +305,14 @@
       overlay.addEventListener('animationend', () => {
         if (overlay.classList.contains('fade-out')) {
           overlay.style.display = 'none';
-          mainContent.style.opacity = '1';
+          logoContainer.classList.add('show');
+          
+          setTimeout(() => {
+            logoContainer.classList.add('move');
+            setTimeout(() => {
+              mainContent.style.opacity = '1';
+            }, 500); // Show main content after logo has moved
+          }, 1000); // Start moving logo after 1 second
         }
       });
     });
