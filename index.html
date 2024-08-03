@@ -1,11 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smooth Animation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F8F8F8;
+      color: #333333;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: #555555;
+    }
+
+    .animated-element {
+      font-size: 2rem;
+      padding: 1rem;
+      background-color: #FFFFFF;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-statement {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: justify;
+      line-height: 1.6;
+      color: #555555;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      font-size: 1.2rem;
+      font-weight: 500;
+      background-color: #FFFFFF;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+      color: #555555;
+    }
+
+    .rating {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      color: #555555;
+    }
+
+    .content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #FFFFFF;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .content__logo {
+      width: 50%;
+      position: relative;
+      margin: 0 auto;
+      animation-name: change2;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 6s;
+    }
+
+    .content__logo.move {
+      animation: move 2s forwards;
+    }
+
+    @media (max-width: 900px) {
+      .content__logo {
+        animation-name: mobilechange2;
+        animation-duration: 1s;
+      }
+
+      .content__logo.move {
+        animation: mobilemove 2s forwards;
+      }
+    }
+
+    .content__logo img {
+      width: 100%;
+    }
+
+    .content__wrapper {
+      overflow: hidden;
+      height: 80px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .content__wrapper {
+        font-size: 18px !important;
+      }
+    }
+
+    .content__wrapper__section1,
+    .content__wrapper__section2 {
+      height: 40px;
+      overflow: hidden;
+      animation-name: change1;
+      animation-duration: 2s;
+      animation-fill-mode: forwards;
+    }
+
+    .content__wrapper__section1 {
+      animation-delay: 4s;
+    }
+
+    .content__wrapper__section2 {
+      animation-delay: 4.5s;
+    }
+
+    .content__container {
+      font-weight: 500;
+      overflow: hidden;
+      height: 40px;
+      padding: 0 40px;
+      color: #555555;
+    }
+
+    .content__container__text {
+      display: inline;
+      float: left;
+      margin: 0;
+    }
+
+    .content__container__list {
+      margin-top: 0;
+      padding-left: 270px;
+      text-align: left;
+      list-style: none;
+      animation-name: change;
+      animation-duration: 5s;
+      animation-fill-mode: forwards;
+      animation-delay: 1s;
+    }
+
+    @media (max-width: 900px) {
+      .content__container__list {
+        padding-left: 140px;
+      }
+    }
+
+    .content__container__list__item {
+      line-height: 40px;
+      margin: 0;
+      margin-left: 0.45rem;
+    }
+
+    @keyframes change {
+      0% {
+        transform: translateZ(0);
+      }
+      14.2% {
+        transform: translate3d(0, -40px, 0);
+      }
+      28.4% {
+        transform: translate3d(0, -80px, 0);
+      }
+      42.6% {
+        transform: translate3d(0, -120px, 0);
+      }
+      56.8% {
+        transform: translate3d(0, -160px, 0);
+      }
+      61% {
+        transform: translate3d(0, -200px, 0);
+      }
+      75.2% {
+        transform: translate3d(0, -240px, 0);
+      }
+      89.4% {
+        transform: translate3d(0, -280px, 0);
+      }
+    }
+
+    @keyframes change1 {
+      0% {
+        transform: translateZ(0);
+      }
+      50% {
+        transform: translate3d(0, -40px, 0);
+      }
+      to {
+        transform: translate3d(0, -80px, 0);
+      }
+    }
+
+    @keyframes change2 {
+      0% {
+        top: 110%;
+      }
+      to {
+        top: 30%;
+      }
+    }
+
+    @keyframes mobilechange2 {
+      0% {
+        top: 110%;
+      }
+      to {
+        top: 80%;
+      }
+    }
+
+    @keyframes move {
+      0% {
+        width: 100%;
+        top: 30%;
+      }
+      to {
+        width: 10rem;
+        top: 0;
+        left: 2rem;
+      }
+    }
+
+    @keyframes mobilemove {
+      0% {
+        width: 100%;
+        top: 80%;
+      }
+      to {
+        width: 10rem;
+        top: 0;
+        left: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    
+  <h1 class="animate__animated animate__bounceInLeft">
+    <span class="animate__animated animate__fadeInUp">Hello</span>
+    <span class="animate__animated animate__fadeInUp animate__delay-1s">Person</span>
+    <span class="animate__animated animate__fadeInUp animate__delay-2s">Animal</span>
+  </h1>
+
+  <p class="mission-statement animate__animated animate__fadeInUp animate__delay-3s">
+    A PLACE WHERE IDEAS BECOME REALITY <br><br>
+    Our mission is to provide exceptional design to create an elegant environment, improve functionality, and increase property value. We turn your vision into a stunning space reflecting your needs, desires, and personality tailored to your lifestyle and budget.
+  </p>
+
+  <div class="stats">
+    <div class="stat animate__animated animate__fadeInLeft animate__delay-4s">
+      <span>+8</span>
+      <p>Years of Experience</p>
+    </div>
+    <div class="stat animate__animated animate__fadeInUp animate__delay-5s">
+      <span>+500</span>
+      <p>Success Projects</p>
+    </div>
+    <div class="stat animate__animated animate__fadeInRight animate__delay-6s">
+      <span>+100</span>
+      <p>Happy Customers</p>
+    </div>
+  </div>
+
+  <p class="animate__animated animate__fadeInUp animate__delay-7s">Whaterver good things we build<br>end up building us</p>
+
+  <div class="rating animate__animated animate__bounceIn animate__delay-8s">
+    <span>4.9</span> (179)
+  </div>
+
+  <div class="content">
+    <div class="content__wrapper">
+      <div class="content__wrapper__section1">
+        <div class="content__container animate__animated animate__fadeInUp">
+          <p class="content__container__text">Hello</p>
+        </div>
+      </div>
+      <div class="content__wrapper__section2">
+        <div class="content__container animate__animated animate__fadeInUp animate__delay-1s">
+          <p class="content__container__text">Person</p>
+        </div>
+      </div>
+    </div>
+    <ul class="content__container__list">
+      <li class="content__container__list__item">Animal</li>
+      <!-- Add more list items as needed -->
+    </ul>
+    <div class="content__logo">
+      <img src="your-logo.png" alt="Logo">
+    </div>
+  </div>
+
+  <script>
+    const logo = document.querySelector('.content__logo');
+    setTimeout(() => {
+      logo.classList.add('move');
+    }, 7000); // Delay of 7 seconds (6s animation delay + 1s animation duration)
+  </script>
 </body>
 </html>
