@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smooth Animation - Design Studio</title>
+  <title>Design Studio - Creative Solutions</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -112,10 +112,10 @@
     .main-content {
       opacity: 0;
       transition: opacity 1s ease-in;
-      padding-top: 120px; /* Add space for the logo */
+      padding-top: 120px;
     }
 
-    h1 {
+    h1, h2 {
       margin-bottom: 2rem;
       font-weight: 700;
       color: var(--primary-color);
@@ -123,7 +123,7 @@
       transition: transform 0.3s ease;
     }
 
-    h1:hover {
+    h1:hover, h2:hover {
       transform: scale(1.05);
     }
 
@@ -227,6 +227,63 @@
       box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
     }
 
+    .work-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .work-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .work-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .work-item-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .work-item:hover .work-item-overlay {
+      opacity: 1;
+    }
+
+    .work-item-title {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 1rem;
+    }
+
     @media (max-width: 768px) {
       .content__container {
         font-size: 3rem;
@@ -289,6 +346,34 @@
       </div>
     </div>
 
+    <h2>Review Our Work</h2>
+    <div class="work-gallery">
+      <div class="work-item">
+        <img src="https://via.placeholder.com/400x300?text=Project+1" alt="Project 1">
+        <div class="work-item-overlay">
+          <h3 class="work-item-title">Modern Living Room Design</h3>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://via.placeholder.com/400x300?text=Project+2" alt="Project 2">
+        <div class="work-item-overlay">
+          <h3 class="work-item-title">Minimalist Kitchen Renovation</h3>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://via.placeholder.com/400x300?text=Project+3" alt="Project 3">
+        <div class="work-item-overlay">
+          <h3 class="work-item-title">Luxurious Master Bedroom</h3>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://via.placeholder.com/400x300?text=Project+4" alt="Project 4">
+        <div class="work-item-overlay">
+          <h3 class="work-item-title">Contemporary Office Space</h3>
+        </div>
+      </div>
+    </div>
+
     <a href="#" class="cta-button">Get Started</a>
   </div>
 
@@ -300,7 +385,7 @@
       
       setTimeout(() => {
         overlay.classList.add('fade-out');
-      }, 5000); // Fade out after 5 seconds
+      }, 5000);
 
       overlay.addEventListener('animationend', () => {
         if (overlay.classList.contains('fade-out')) {
@@ -311,9 +396,39 @@
             logoContainer.classList.add('move');
             setTimeout(() => {
               mainContent.style.opacity = '1';
-            }, 500); // Show main content after logo has moved
-          }, 1000); // Start moving logo after 1 second
+              animateOnScroll();
+            }, 500);
+          }, 1000);
         }
+      });
+
+      function animateOnScroll() {
+        const elements = document.querySelectorAll('.stat, .work-item');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        }, { threshold: 0.1 });
+
+        elements.forEach(element => {
+          element.style.opacity = '0';
+          element.style.transform = 'translateY(20px)';
+          element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          observer.observe(element);
+        });
+      }
+
+      const workItems = document.querySelectorAll('.work-item');
+      workItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          item.querySelector('.work-item-overlay').style.opacity = '1';
+        });
+        item.addEventListener('mouseleave', () => {
+          item.querySelector('.work-item-overlay').style.opacity = '0';
+        });
       });
     });
   </script>
