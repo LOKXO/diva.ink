@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User 106 - Full-Stack Developer Portfolio</title>
+    <link rel="icon" type="image/png" href="hello.png">
+    
     <style>
         :root {
             --primary-color: #8A2BE2;
             --secondary-color: #FFD700;
-            --bg-color: #1A1A2E;
-            --text-color: #E0E0E0;
-            --accent-color: #4B0082;
+            --bg-color: #1e1d34;
+            --text-color: #e6e6e0;
+            --accent-color: #6c22a0;
         }
         body {
             font-family: 'Courier New', monospace;
@@ -316,14 +318,14 @@
         const clickMe = document.getElementById('click-me');
         setTimeout(() => {
             clickMe.style.opacity = '1';
-        }, 10000);
+        }, 100);
 
         clickMe.addEventListener('click', () => {
             window.location.href = 'mekaniks.html';
         });
 
         let konamiCode = '';
-        const konamiSequence = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
+        const konamiSequence = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRight';
         
         document.addEventListener('keydown', (e) => {
             konamiCode += e.key;
