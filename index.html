@@ -365,7 +365,6 @@
         console.log('%cCongratulations! You found a hidden message.', 'color: #FFD700; font-size: 20px; font-weight: bold;');
         console.log('%cUser 106 approves of your curiosity!', 'color: #8A2BE2; font-size: 16px;');
 
-        // New improvement: Animated skill hover effect
         document.querySelectorAll('.skill').forEach(skill => {
             skill.addEventListener('mouseenter', () => {
                 skill.style.transform = 'translateY(-10px) scale(1.1)';
@@ -377,7 +376,6 @@
             });
         });
 
-        // New improvement: Scroll-triggered animations
         const observerOptions = {
             root: null,
             rootMargin: '0px',
