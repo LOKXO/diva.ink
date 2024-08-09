@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>هیئت تنیس استان هرمزگان</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap");
+
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #e74c3c;
+        --background-color: #f4f4f4;
+        --text-color: #333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      header.scrolled {
+        padding: 0.5rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        color: var(--secondary-color);
+      }
+
+      #hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("tennis_court.jpg") no-repeat center center/cover;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding-top: 80px;
+      }
+
+      #hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s forwards;
+      }
+
+      #hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s 0.5s forwards;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #c0392b;
+      }
+
+      #announcements {
+        padding: 4rem 0;
+        background: white;
+      }
+
+      .announcement {
+        background: var(--background-color);
+        border-radius: 5px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .announcement:hover {
+        transform: translateY(-5px);
+      }
+
+      #live-scores {
+        background: var(--primary-color);
+        color: white;
+        padding: 4rem 0;
+      }
+
+      .score-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        background: var(--text-color);
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="#hero">خانه</a></li>
+            <li><a href="#announcements">اعلانات</a></li>
+            <li><a href="#live-scores">نتایج زنده</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="hero">
+      <div class="container">
+        <h1>به هیئت تنیس هرمزگان خوش آمدید</h1>
+        <p>محلی برای رشد و توسعه تنیس در استان هرمزگان</p>
+        <a href="#" class="btn">اطلاعات بیشتر</a>
+      </div>
+    </section>
+
+    <section id="announcements">
+      <div class="container">
+        <h2>اعلانات</h2>
+        <div class="announcement">
+          <h3>برگزاری مسابقات استانی</h3>
+          <p>
+            مسابقات استانی تنیس در تاریخ 15 شهریور برگزار خواهد شد. برای ثبت نام
+            به دفتر هیئت مراجعه کنید.
+          </p>
+        </div>
+        <div class="announcement">
+          <h3>کلاس‌های آموزشی تابستان</h3>
+          <p>
+            کلاس‌های آموزشی تنیس برای رده‌های سنی مختلف در تابستان برگزار
+            می‌شود. برای اطلاعات بیشتر با ما تماس بگیرید.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="live-scores">
+      <div class="container">
+        <h2>نتایج زنده</h2>
+        <div class="score-card">
+          <h3>مسابقه نهایی جام استان</h3>
+          <p>علی محمدی 3 - 2 رضا کریمی</p>
+        </div>
+        <div class="score-card">
+          <h3>مسابقه رده‌بندی</h3>
+          <p>مهدی حسینی 1 - 1 احمد رضایی</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>تمامی حقوق محفوظ است &copy; 2024 هیئت تنیس هرمزگان</p>
+      </div>
+    </footer>
+
+    <script>
+      // Animation for header on scroll
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
