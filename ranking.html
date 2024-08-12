@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رنکینگ - هیئت تنیس استان هرمزگان</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #0056b3;
+        --secondary-color: #f8f9fa;
+        --text-color: #333333;
+        --background-color: #fff9ed;
+        --accent-color: #007bff;
+      }
+
+      * {
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Vazirmatn", Arial, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        animation: fadeIn 1s ease-out;
+      }
+
+      nav {
+        background-color: var(--secondary-color);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      nav ul li a:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      main {
+        padding: 3rem 0;
+      }
+
+      .section {
+        margin-bottom: 4rem;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: slideUp 0.5s ease-out;
+      }
+
+      .section h2 {
+        color: var(--text-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem;
+        text-align: right;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      th {
+        background-color: var(--secondary-color);
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      tr:hover {
+        background-color: #e9ecef;
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .ranking-category {
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>هیئت تنیس استان هرمزگان</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="tennis3.html">صفحه اصلی</a></li>
+          <li><a href="#men">رنکینگ آقایان</a></li>
+          <li><a href="#women">رنکینگ بانوان</a></li>
+          <li><a href="#juniors">رنکینگ جوانان</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section id="men" class="section ranking-category">
+        <h2>رنکینگ آقایان</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>رتبه</th>
+              <th>نام</th>
+              <th>امتیاز</th>
+              <th>تعداد بازی</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>علی محمدی</td>
+              <td>2500</td>
+              <td>20</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>رضا احمدی</td>
+              <td>2350</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>محمد حسینی</td>
+              <td>2200</td>
+              <td>22</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="women" class="section ranking-category">
+        <h2>رنکینگ بانوان</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>رتبه</th>
+              <th>نام</th>
+              <th>امتیاز</th>
+              <th>تعداد بازی</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>مریم علوی</td>
+              <td>2400</td>
+              <td>19</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>زهرا رضایی</td>
+              <td>2300</td>
+              <td>21</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>فاطمه کریمی</td>
+              <td>2150</td>
+              <td>17</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="juniors" class="section ranking-category">
+        <h2>رنکینگ جوانان</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>رتبه</th>
+              <th>نام</th>
+              <th>امتیاز</th>
+              <th>تعداد بازی</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>امیر حسین محمدی</td>
+              <td>1800</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>نگار احمدی</td>
+              <td>1750</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>علی رضا کاظمی</td>
+              <td>1700</td>
+              <td>14</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 هیئت تنیس استان هرمزگان. تمامی حقوق محفوظ است.</p>
+      </div>
+    </footer>
+  </body>
+</html>
