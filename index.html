@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DIVA</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Mono&family=Roboto+Mono&family=Fira+Code&family=Source+Code+Pro&family=Ubuntu+Mono&family=Press+Start+2P&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Mono&family=Roboto+Mono&family=Fira+Code&family=Source+Code+Pro&family=Ubuntu+Mono&display=swap");
 
       :root {
         --primary-color: #1a8cff;
         --secondary-color: #0a0a0a;
         --accent-color: #8a2be2;
         --text-color: #e6e6e6;
-        --glow-color: rgba(138, 43, 226, 0.7);
+        --glow-color: rgba(138, 43, 226, 0.8);
         --header-glow-color: #8a2be2;
         --diva-meaning-color: #ff3399;
       }
@@ -66,24 +66,24 @@
 
       #animated-title {
         font-family: "Orbitron", sans-serif;
-        font-size: 5vw; /* Reduced from 6vw to 5vw */
+        font-size: 5vw;
         text-align: center;
         text-transform: uppercase;
         position: relative;
         color: var(--accent-color);
-        text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color),
-          0 0 30px var(--glow-color), 0 0 40px var(--glow-color),
-          0 0 70px var(--glow-color), 0 0 80px var(--glow-color),
-          0 0 100px var(--glow-color), 0 0 150px var(--glow-color);
-        animation: pulsate 1.5s infinite alternate;
+        text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color),
+          0 0 45px var(--glow-color), 0 0 60px var(--glow-color),
+          0 0 90px var(--glow-color), 0 0 105px var(--glow-color),
+          0 0 120px var(--glow-color), 0 0 180px var(--glow-color);
+        animation: pulsate 2s infinite alternate;
       }
 
       @keyframes pulsate {
         100% {
-          text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color),
-            0 0 15px var(--glow-color), 0 0 20px var(--glow-color),
-            0 0 35px var(--glow-color), 0 0 40px var(--glow-color),
-            0 0 50px var(--glow-color), 0 0 75px var(--glow-color);
+          text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color),
+            0 0 30px var(--glow-color), 0 0 40px var(--glow-color),
+            0 0 60px var(--glow-color), 0 0 70px var(--glow-color),
+            0 0 80px var(--glow-color), 0 0 100px var(--glow-color);
         }
       }
 
@@ -91,7 +91,7 @@
         display: inline-block;
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.3s ease;
+        transition: all 0.5s ease;
       }
 
       #animated-title span.visible {
@@ -100,31 +100,31 @@
       }
 
       .glow {
-        text-shadow: 0 0 2px var(--glow-color), 0 0 4px var(--glow-color),
-          0 0 6px var(--glow-color);
+        text-shadow: 0 0 4px var(--glow-color), 0 0 8px var(--glow-color),
+          0 0 12px var(--glow-color);
       }
 
       h2 {
-        font-size: 1.5em;
-        margin-top: 30px;
+        font-size: 1.4em;
+        margin-top: 40px;
         color: var(--accent-color);
-        font-family: "Press Start 2P", cursive;
-        text-shadow: 0 0 4px var(--header-glow-color),
-          0 0 8px var(--header-glow-color), 0 0 12px var(--header-glow-color);
+        font-family: "Orbitron", sans-serif;
+        text-shadow: 0 0 6px var(--header-glow-color),
+          0 0 12px var(--header-glow-color), 0 0 18px var(--header-glow-color);
       }
 
       p,
       .code-block {
         font-size: 1.1em;
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
-        animation: fadeIn 1s ease-out;
+        margin-bottom: 25px;
+        transition: all 0.5s ease;
+        animation: fadeIn 1.5s ease-out;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(20px);
+          transform: translateY(30px);
         }
         to {
           opacity: 1;
@@ -134,52 +134,55 @@
 
       p:hover,
       .code-block:hover {
-        transform: scale(1.02);
-        filter: blur(0.5px);
+        transform: scale(1.03);
+        filter: brightness(1.2);
       }
 
       .code-block {
-        background-color: rgba(26, 26, 26, 0.8);
+        background-color: rgba(26, 26, 26, 0.9);
         border-left: 4px solid var(--primary-color);
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: 20px;
+        margin-bottom: 30px;
         overflow-x: auto;
-        border-radius: 5px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
       }
 
       #diva-meaning {
-        font-size: 1.2em;
+        font-size: 1.4em;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         color: var(--diva-meaning-color);
-        text-shadow: 0 0 4px var(--diva-meaning-color),
-          0 0 8px var(--diva-meaning-color), 0 0 12px var(--diva-meaning-color);
-        animation: pulse 2s infinite;
+        text-shadow: 0 0 6px var(--diva-meaning-color),
+          0 0 12px var(--diva-meaning-color), 0 0 18px var(--diva-meaning-color);
+        animation: pulse 3s infinite;
       }
 
       @keyframes pulse {
-        0% {
+        0%,
+        100% {
           transform: scale(1);
         }
         50% {
-          transform: scale(1.05);
-        }
-        100% {
-          transform: scale(1);
+          transform: scale(1.08);
         }
       }
 
       .arsenal-item {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         font-weight: bold;
-        text-shadow: 0 0 3px currentColor;
-        transition: all 0.3s ease;
+        text-shadow: 0 0 5px currentColor;
+        transition: all 0.4s ease;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: rgba(26, 26, 26, 0.6);
+        font-size: 0.9em;
       }
 
       .arsenal-item:hover {
-        transform: translateX(10px);
-        filter: blur(1px);
+        transform: translateX(15px) scale(1.05);
+        filter: brightness(1.3);
+        box-shadow: 0 0 15px currentColor;
       }
 
       .arsenal-item:nth-child(1) {
@@ -206,13 +209,17 @@
         color: #ff7eb6;
         font-family: "Orbitron", sans-serif;
       }
+      .arsenal-item:nth-child(7) {
+        color: #9b59b6;
+        font-family: "Roboto Mono", monospace;
+      }
 
       @media (max-width: 768px) {
         #animated-title {
-          font-size: 7vw;
+          font-size: 8vw;
         }
         #title-container {
-          height: 7vw;
+          height: 8vw;
         }
         h2 {
           font-size: 1.2em;
@@ -222,12 +229,12 @@
       .glow-center {
         text-align: center;
         color: #e6e6e6;
-        text-shadow: 0 0 5px rgba(200, 220, 255, 0.3),
-          0 0 10px rgba(200, 220, 255, 0.2), 0 0 15px rgba(200, 220, 255, 0.1);
+        text-shadow: 0 0 8px rgba(200, 220, 255, 0.5),
+          0 0 15px rgba(200, 220, 255, 0.3), 0 0 25px rgba(200, 220, 255, 0.2);
         font-size: 1.2em;
-        margin: 20px 0;
-        font-weight: 300;
-        letter-spacing: 1px;
+        margin: 30px 0;
+        font-weight: 400;
+        letter-spacing: 2px;
       }
     </style>
   </head>
@@ -243,27 +250,50 @@
         Digital Intrusion Vulnerability Analysis
       </div>
 
-      <p class="glow-center">Decompyling malware since 2021 !</p>
+      <p class="glow-center">Decompiling malware since 2021!</p>
 
       <h2 class="glow">What I Do</h2>
       <p class="glow">
-        i decompile, find and/or expose malware i do it for fun and i do **NOT**
-        accept donations
+        As a malware analyst, I decompile, find and/or expose malware. I do it
+        for fun and I do <strong>NOT</strong>
+        accept donations.
       </p>
 
-      <h2 class="glow">Tools :</h2>
+      <h2
+        class="glow"
+        style="
+          font-size: 1.2em;
+          font-family: 'Orbitron', sans-serif;
+          color: #1a8cff;
+        "
+      >
+        Arsenal
+      </h2>
       <div class="code-block">
-        <div class="arsenal-item">IDA Pro</div>
-        <div class="arsenal-item">Ghidra</div>
-        <div class="arsenal-item">x64dbg</div>
-        <div class="arsenal-item">Wireshark</div>
-        <div class="arsenal-item">Custom scripts</div>
-        <div class="arsenal-item">DnSpy</div>
-        <div class="arsenal-item">VM farm, MITM proxy</div>
+        <div class="arsenal-item">IDA Pro - Advanced Disassembler</div>
+        <div class="arsenal-item">Ghidra - Reverse Engineering Suite</div>
+        <div class="arsenal-item">x64dbg - Windows Debugger</div>
+        <div class="arsenal-item">Wireshark - Network Protocol Analyzer</div>
+        <div class="arsenal-item">Custom Python Scripts - Automation Tools</div>
+        <div class="arsenal-item">
+          DnSpy - .NET Debugger and Assembly Editor
+        </div>
+        <div class="arsenal-item">
+          VM Farm & MITM Proxy - Controlled Environment
+        </div>
       </div>
 
-      <h2 class="glow">To my fellow skids</h2>
-      <p class="glow">
+      <h2
+        class="glow"
+        style="
+          font-size: 1.2em;
+          font-family: 'Orbitron', sans-serif;
+          color: #ff3399;
+        "
+      >
+        To my fellow skids
+      </h2>
+      <p class="glow" style="font-size: 1em">
         GET A FUCKING JOB, FIND YOUR DAD, DRINK SOME MILK AND KYS
       </p>
     </div>
@@ -301,7 +331,7 @@
           }
         }
 
-        const speed = isDeleting ? 50 : 100; // Faster animation
+        const speed = isDeleting ? 100 : 200;
         setTimeout(animateTitle, speed);
       }
 
@@ -309,78 +339,78 @@
 
       const matrixCanvas = document.getElementById("matrix-canvas");
       const matrixCtx = matrixCanvas.getContext("2d");
+      const particlesCanvas = document.getElementById("particles-canvas");
+      const particlesCtx = particlesCanvas.getContext("2d");
+      const cursorCanvas = document.getElementById("cursor-canvas");
+      const cursorCtx = cursorCanvas.getContext("2d");
 
-      matrixCanvas.width = window.innerWidth;
-      matrixCanvas.height = window.innerHeight;
+      function resizeCanvases() {
+        matrixCanvas.width =
+          particlesCanvas.width =
+          cursorCanvas.width =
+            window.innerWidth;
+        matrixCanvas.height =
+          particlesCanvas.height =
+          cursorCanvas.height =
+            window.innerHeight;
+      }
+
+      resizeCanvases();
 
       const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}[]|;:,.<>?";
-      const fontSize = 10;
+      const fontSize = 12;
       const columns = matrixCanvas.width / fontSize;
-      const drops = [];
-
-      for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
-      }
+      const drops = new Array(columns).fill(1);
 
       function drawMatrix() {
-        matrixCtx.fillStyle = "rgba(10, 10, 10, 0.05)";
+        matrixCtx.fillStyle = "rgba(0, 0, 0, 0.05)";
         matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
 
         matrixCtx.fillStyle = "#1a8cff";
         matrixCtx.font = fontSize + "px monospace";
 
         for (let i = 0; i < drops.length; i++) {
-          const text = characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
+          const text =
+            characters[Math.floor(Math.random() * characters.length)];
           matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
 
           if (
             drops[i] * fontSize > matrixCanvas.height &&
-            Math.random() > 0.975
+            Math.random() > 0.99
           ) {
             drops[i] = 0;
           }
-          drops[i]++;
+          drops[i] += 0.5;
         }
       }
 
-      // Particles
-      const particlesCanvas = document.getElementById("particles-canvas");
-      const particlesCtx = particlesCanvas.getContext("2d");
-
-      particlesCanvas.width = window.innerWidth;
-      particlesCanvas.height = window.innerHeight;
-
       const particles = [];
-      const particleCount = 100;
+      const particleCount = 50;
 
       class Particle {
         constructor() {
           this.x = Math.random() * particlesCanvas.width;
           this.y = Math.random() * particlesCanvas.height;
-          this.radius = Math.random() * 2;
-          this.speedX = Math.random() - 0.5;
-          this.speedY = Math.random() - 0.5;
+          this.radius = Math.random() * 3;
+          this.speedX = (Math.random() - 0.5) * 0.5;
+          this.speedY = (Math.random() - 0.5) * 0.5;
         }
 
         update() {
           this.x += this.speedX;
           this.y += this.speedY;
 
-          if (this.x < 0 || this.x > particlesCanvas.width) {
+          if (this.x < 0 || this.x > particlesCanvas.width)
             this.speedX = -this.speedX;
-          }
-          if (this.y < 0 || this.y > particlesCanvas.height) {
+          if (this.y < 0 || this.y > particlesCanvas.height)
             this.speedY = -this.speedY;
-          }
         }
 
         draw() {
           particlesCtx.beginPath();
           particlesCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          particlesCtx.fillStyle = "rgba(128, 128, 128, 0.5)";
+          particlesCtx.fillStyle = "rgba(138, 43, 226, 0.6)";
           particlesCtx.fill();
         }
       }
@@ -402,25 +432,18 @@
         });
       }
 
-      // Cursor Trail
-      const cursorCanvas = document.getElementById("cursor-canvas");
-      const cursorCtx = cursorCanvas.getContext("2d");
-
-      cursorCanvas.width = window.innerWidth;
-      cursorCanvas.height = window.innerHeight;
-
       const trail = [];
-      const trailLength = 10;
+      const trailLength = 15;
 
       class TrailPoint {
         constructor(x, y) {
           this.x = x;
           this.y = y;
           this.age = 0;
-          this.gravity = 0.5;
+          this.gravity = 0.3;
           this.velocity = {
-            x: (Math.random() - 0.5) * 2,
-            y: Math.random() * 2 + 2,
+            x: (Math.random() - 0.5) * 1.5,
+            y: Math.random() * 1.5 + 1.5,
           };
         }
 
@@ -443,41 +466,65 @@
       function drawTrail() {
         cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
 
-        // Add new trail point
         if (
           trail.length === 0 ||
           Math.hypot(lastMouseX - trail[0].x, lastMouseY - trail[0].y) > 5
         ) {
-          trail.unshift(new TrailPoint(lastMouseX, lastMouseY));
+          const newPoint = new TrailPoint(lastMouseX, lastMouseY);
+          newPoint.velocity.y += 0.5;
+          trail.unshift(newPoint);
           if (trail.length > trailLength) {
             trail.pop();
           }
         }
 
-        // Draw trail
-        cursorCtx.beginPath();
-        trail.forEach((point, index) => {
-          point.update();
-          const alpha = 1 - index / trailLength;
-          cursorCtx.strokeStyle = `rgba(26, 140, 255, ${alpha})`;
-          cursorCtx.lineWidth = 2 * (1 - index / trailLength);
-          if (index === 0) {
-            cursorCtx.moveTo(point.x, point.y);
-          } else {
-            cursorCtx.lineTo(point.x, point.y);
-          }
+        trail.forEach((point) => {
+          point.velocity.y += 0.1;
+          point.y += point.velocity.y;
         });
+
+        cursorCtx.beginPath();
+        const crosshairSize = 6;
+        const glowSize = 2;
+
+        cursorCtx.shadowColor = "rgba(26, 140, 255, 0.6)";
+        cursorCtx.shadowBlur = glowSize;
+
+        cursorCtx.strokeStyle = "#1a8cff";
+        cursorCtx.lineWidth = 1.5;
+        cursorCtx.moveTo(lastMouseX - crosshairSize, lastMouseY);
+        cursorCtx.lineTo(lastMouseX + crosshairSize, lastMouseY);
+        cursorCtx.moveTo(lastMouseX, lastMouseY - crosshairSize);
+        cursorCtx.lineTo(lastMouseX, lastMouseY + crosshairSize);
         cursorCtx.stroke();
 
-        // Draw crosshair
         cursorCtx.beginPath();
-        cursorCtx.moveTo(lastMouseX - 10, lastMouseY);
-        cursorCtx.lineTo(lastMouseX + 10, lastMouseY);
-        cursorCtx.moveTo(lastMouseX, lastMouseY - 10);
-        cursorCtx.lineTo(lastMouseX, lastMouseY + 10);
-        cursorCtx.strokeStyle = "#1a8cff";
-        cursorCtx.lineWidth = 2;
-        cursorCtx.stroke();
+        cursorCtx.arc(lastMouseX, lastMouseY, 1.5, 0, Math.PI * 2);
+        cursorCtx.fillStyle = "#ffffff";
+        cursorCtx.fill();
+
+        cursorCtx.shadowColor = "transparent";
+        cursorCtx.shadowBlur = 0;
+
+        const gradient = cursorCtx.createRadialGradient(
+          lastMouseX,
+          lastMouseY,
+          0,
+          lastMouseX,
+          lastMouseY,
+          crosshairSize + glowSize
+        );
+        gradient.addColorStop(0, "rgba(26, 140, 255, 0.4)");
+        gradient.addColorStop(1, "rgba(26, 140, 255, 0)");
+        cursorCtx.fillStyle = gradient;
+        cursorCtx.arc(
+          lastMouseX,
+          lastMouseY,
+          crosshairSize + glowSize,
+          0,
+          Math.PI * 2
+        );
+        cursorCtx.fill();
       }
 
       function animate() {
@@ -489,7 +536,6 @@
 
       animate();
 
-      // Resize event listener
       window.addEventListener("resize", () => {
         matrixCanvas.width = window.innerWidth;
         matrixCanvas.height = window.innerHeight;
