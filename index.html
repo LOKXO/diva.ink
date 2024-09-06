@@ -1,412 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User 106 - Full-Stack Developer Portfolio</title>
-    <link rel="icon" href="hello.png" type="image/png">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIVA</title>
     <style>
-        :root {
-            --primary-color: #8A2BE2;
-            --secondary-color: #FFD700;
-            --bg-color: #1e1d34;
-            --text-color: #e6e6e0;
-            --accent-color: #631fb6;
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Mono&family=Roboto+Mono&family=Fira+Code&family=Source+Code+Pro&family=Ubuntu+Mono&family=Press+Start+2P&display=swap");
 
-            .github-icon {
-            width: 37px;
-            height: 37px;
-            vertical-align: middle;
-        }
+      :root {
+        --primary-color: #1a8cff;
+        --secondary-color: #0a0a0a;
+        --accent-color: #8a2be2;
+        --text-color: #e6e6e6;
+        --glow-color: rgba(138, 43, 226, 0.7);
+        --header-glow-color: #8a2be2;
+        --diva-meaning-color: #ff3399;
+      }
 
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: "Space Mono", monospace;
+        color: var(--text-color);
+        line-height: 1.6;
+        cursor: none;
+        overflow-x: hidden;
+        background-color: transparent;
+        position: relative;
+      }
+
+      #matrix-canvas,
+      #particles-canvas,
+      #cursor-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      #matrix-canvas {
+        z-index: -3;
+      }
+      #particles-canvas {
+        z-index: -2;
+      }
+      #cursor-canvas {
+        z-index: 9999;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      #title-container {
+        height: 6vw;
+        margin-bottom: 20px;
+      }
+
+      #animated-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 5vw; /* Reduced from 6vw to 5vw */
+        text-align: center;
+        text-transform: uppercase;
+        position: relative;
+        color: var(--accent-color);
+        text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color),
+          0 0 30px var(--glow-color), 0 0 40px var(--glow-color),
+          0 0 70px var(--glow-color), 0 0 80px var(--glow-color),
+          0 0 100px var(--glow-color), 0 0 150px var(--glow-color);
+        animation: pulsate 1.5s infinite alternate;
+      }
+
+      @keyframes pulsate {
+        100% {
+          text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color),
+            0 0 15px var(--glow-color), 0 0 20px var(--glow-color),
+            0 0 35px var(--glow-color), 0 0 40px var(--glow-color),
+            0 0 50px var(--glow-color), 0 0 75px var(--glow-color);
         }
-        body {
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            overflow-x: hidden;
+      }
+
+      #animated-title span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      #animated-title span.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .glow {
+        text-shadow: 0 0 2px var(--glow-color), 0 0 4px var(--glow-color),
+          0 0 6px var(--glow-color);
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin-top: 30px;
+        color: var(--accent-color);
+        font-family: "Press Start 2P", cursive;
+        text-shadow: 0 0 4px var(--header-glow-color),
+          0 0 8px var(--header-glow-color), 0 0 12px var(--header-glow-color);
+      }
+
+      p,
+      .code-block {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        header {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            padding: 2rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+      }
+
+      p:hover,
+      .code-block:hover {
+        transform: scale(1.02);
+        filter: blur(0.5px);
+      }
+
+      .code-block {
+        background-color: rgba(26, 26, 26, 0.8);
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #diva-meaning {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--diva-meaning-color);
+        text-shadow: 0 0 4px var(--diva-meaning-color),
+          0 0 8px var(--diva-meaning-color), 0 0 12px var(--diva-meaning-color);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
         }
-        header h1, header p {
-            position: relative;
-            z-index: 1;
+        50% {
+          transform: scale(1.05);
         }
-        nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        100% {
+          transform: scale(1);
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
+      }
+
+      .arsenal-item {
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-shadow: 0 0 3px currentColor;
+        transition: all 0.3s ease;
+      }
+
+      .arsenal-item:hover {
+        transform: translateX(10px);
+        filter: blur(1px);
+      }
+
+      .arsenal-item:nth-child(1) {
+        color: #3a9bdc;
+        font-family: "Roboto Mono", monospace;
+      }
+      .arsenal-item:nth-child(2) {
+        color: #4ecdc4;
+        font-family: "Fira Code", monospace;
+      }
+      .arsenal-item:nth-child(3) {
+        color: #45b7d1;
+        font-family: "Source Code Pro", monospace;
+      }
+      .arsenal-item:nth-child(4) {
+        color: #5cd85a;
+        font-family: "Ubuntu Mono", monospace;
+      }
+      .arsenal-item:nth-child(5) {
+        color: #f7b731;
+        font-family: "Space Mono", monospace;
+      }
+      .arsenal-item:nth-child(6) {
+        color: #ff7eb6;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      @media (max-width: 768px) {
+        #animated-title {
+          font-size: 7vw;
         }
-        nav ul li {
-            margin: 0 15px;
+        #title-container {
+          height: 7vw;
         }
-        nav ul li a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            position: relative;
+        h2 {
+          font-size: 1.2em;
         }
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--secondary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-        }
-        h1, h2, h3 {
-            color: var(--secondary-color);
-        }
-        .section {
-            margin: 4rem 0;
-            padding: 2rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .skill {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9em;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .skill:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .contact-form {
-            display: grid;
-            gap: 1rem;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--primary-color);
-            border-radius: 4px;
-            color: var(--text-color);
-            transition: border-color 0.3s ease;
-        }
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--secondary-color);
-            outline: none;
-        }
-        .contact-form button {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .contact-form button:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-        footer {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 4rem;
-        }
-        .social-links {
-            margin-top: 1rem;
-        }
-        .social-links a {
-            color: var(--secondary-color);
-            margin: 0 10px;
-            font-size: 1.5em;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        .typing-animation {
-            overflow: hidden;
-            border-right: .15em solid var(--secondary-color);
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            animation: 
-                typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--secondary-color); }
-        }
-        .easter-egg {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .easter-egg:hover {
-            background-color: var(--accent-color);
-        }
-        .hidden-text {
-            display: none;
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-        .skill:hover .hidden-text {
-            display: inline;
-        }
-        #konami-code {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2em;
-            color: var(--secondary-color);
-            display: none;
-        }
-        #binary-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .binary {
-            position: absolute;
-            color: var(--primary-color);
-            font-size: 14px;
-            user-select: none;
-        }
+      }
+
+      .glow-center {
+        text-align: center;
+        color: #e6e6e6;
+        text-shadow: 0 0 5px rgba(200, 220, 255, 0.3),
+          0 0 10px rgba(200, 220, 255, 0.2), 0 0 15px rgba(200, 220, 255, 0.1);
+        font-size: 1.2em;
+        margin: 20px 0;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
     </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>User 106</h1>
-            <p class="typing-animation">Full-Stack Developer & Problem Solver</p>
-        </div>
-    </header>
+  </head>
+  <body>
+    <canvas id="matrix-canvas"></canvas>
+    <canvas id="particles-canvas"></canvas>
+    <canvas id="cursor-canvas"></canvas>
+    <div class="container">
+      <div id="title-container">
+        <div id="animated-title"></div>
+      </div>
+      <div id="diva-meaning" class="glow">
+        Digital Intrusion Vulnerability Analysis
+      </div>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+      <p class="glow-center">Decompyling malware since 2021 !</p>
 
-    <main class="container">
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <p>Hello! I'm User 106, a full-stack developer with a passion for crafting efficient, scalable, and innovative solutions. My expertise spans a wide range of programming languages and technologies, allowing me to tackle diverse challenges in software development. From web applications to system-level programming, I bring a versatile skill set to every project.</p>
-            <p>With a keen eye for detail and a commitment to clean, maintainable code, I strive to create software that not only meets but exceeds expectations. My approach combines technical proficiency with creative problem-solving, ensuring that each solution is tailored to the unique needs of the project and client.</p>
-        </section>
+      <h2 class="glow">What I Do</h2>
+      <p class="glow">
+        i decompile, find and/or expose malware i do it for fun and i do **NOT**
+        accept donations
+      </p>
 
-        <section id="skills" class="section">
-            <h2>Skills</h2>
-            <div class="skills">
-                <span class="skill">Python <span class="hidden-text">Master of snakes</span></span>
-                <span class="skill">Rust <span class="hidden-text">I never oxidize</span></span>
-                <span class="skill">Go <span class="hidden-text">Gopher enthusiast</span></span>
-                <span class="skill">JavaScript <span class="hidden-text">I speak fluent ES6+</span></span>
-                <span class="skill">HTML5 & CSS3 <span class="hidden-text">Pixel perfectionist</span></span>
-                <span class="skill">React <span class="hidden-text">Component composer</span></span>
-                <span class="skill">Node.js <span class="hidden-text">Server-side sorcerer</span></span>
-                <span class="skill">RESTful APIs <span class="hidden-text">Data whisperer</span></span>
-                <span class="skill">SQL & NoSQL <span class="hidden-text">Database dynamo</span></span>
-                <span class="skill">Docker <span class="hidden-text">Container captain</span></span>
-                <span class="skill">Git & GitHub <span class="hidden-text">Version control virtuoso</span></span>
-                <span class="skill">Cloud Platforms <span class="hidden-text">Head in the clouds</span></span>
-            </div>
-        </section>
+      <h2 class="glow">Tools :</h2>
+      <div class="code-block">
+        <div class="arsenal-item">IDA Pro</div>
+        <div class="arsenal-item">Ghidra</div>
+        <div class="arsenal-item">x64dbg</div>
+        <div class="arsenal-item">Wireshark</div>
+        <div class="arsenal-item">Custom scripts</div>
+        <div class="arsenal-item">DnSpy</div>
+        <div class="arsenal-item">VM farm, MITM proxy</div>
+      </div>
 
-        <section id="contact" class="section">
-            <h2>Get in Touch</h2>
-            <form class="contact-form" id="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-       
-        <div class="container">
-            <p>&copy; 2024 User 106. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/lokxo" target="_blank">
-                    <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <style>.h_iframe-aparat_embed_frame{position:relative;} .h_iframe-aparat_embed_frame .ratio {display:block;width:100%;height:auto;} .h_iframe-aparat_embed_frame iframe {position:absolute;top:0;left:0;width:100%; height:100%;}</style><div class="h_iframe-aparat_embed_frame"> <span style="display: block;padding-top: 57%"></span><iframe scrolling="no" allowfullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  src ="https://www.aparat.com/embed/live/dripofmyshirt"></iframe></div>  
-            </div>
-        </div>
-    </footer>
-
-    <div class="easter-egg" id="click-me">Click me!</div>
-    <div id="konami-code">↑↑↓↓←→←→BA</div>
-    <div id="binary-rain"></div>
+      <h2 class="glow">To my fellow skids</h2>
+      <p class="glow">
+        GET A FUCKING JOB, FIND YOUR DAD, DRINK SOME MILK AND KYS
+      </p>
+    </div>
 
     <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+      const title = document.getElementById("animated-title");
+      const sequences = ["D1V4", "DIVA", "4V1D", "AVID", ""];
+      let currentSequence = 0;
+      let currentChar = 0;
+      let isDeleting = false;
 
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
+      function animateTitle() {
+        const currentText = sequences[currentSequence];
 
-        const clickMe = document.getElementById('click-me');
-        setTimeout(() => {
-            clickMe.style.opacity = '1';
-        }, 100);
-
-        clickMe.addEventListener('click', () => {
-            window.location.href = 'mekaniks.html';
-        });
-
-        let konamiCode = '';
-        const konamiSequence = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRight';
-        
-        document.addEventListener('keydown', (e) => {
-            konamiCode += e.key;
-            if (konamiCode.includes(konamiSequence)) {
-                document.getElementById('konami-code').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('konami-code').style.display = 'none';
-                }, 3000);
-                konamiCode = '';
-            }
-        });
-
-        function createBinaryRain() {
-            const binaryRain = document.getElementById('binary-rain');
-            const binary = '01';
-            const rainDrops = 100;
-
-            for (let i = 0; i < rainDrops; i++) {
-                const drop = document.createElement('div');
-                drop.className = 'binary';
-                drop.style.left = `${Math.random() * 100}%`;
-                drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                drop.style.opacity = Math.random();
-                drop.textContent = binary[Math.floor(Math.random() * binary.length)];
-                binaryRain.appendChild(drop);
-            }
+        if (!isDeleting && currentChar <= currentText.length) {
+          title.innerHTML = currentText
+            .slice(0, currentChar)
+            .split("")
+            .map((char) => `<span class="visible glow">${char}</span>`)
+            .join("");
+          currentChar++;
+          document.title = currentText.slice(0, currentChar);
+        } else if (isDeleting && currentChar >= 0) {
+          title.innerHTML = currentText
+            .slice(0, currentChar)
+            .split("")
+            .map((char) => `<span class="visible glow">${char}</span>`)
+            .join("");
+          currentChar--;
+          document.title = currentText.slice(0, currentChar) || "DIVA";
+        } else {
+          isDeleting = !isDeleting;
+          if (!isDeleting) {
+            currentSequence = (currentSequence + 1) % sequences.length;
+          }
         }
 
-        document.addEventListener('mousemove', (e) => {
-            const binaryRain = document.getElementById('binary-rain');
-            binaryRain.style.opacity = '0.2';
-            setTimeout(() => {
-                binaryRain.style.opacity = '0';
-            }, 500);
+        const speed = isDeleting ? 50 : 100; // Faster animation
+        setTimeout(animateTitle, speed);
+      }
+
+      animateTitle();
+
+      const matrixCanvas = document.getElementById("matrix-canvas");
+      const matrixCtx = matrixCanvas.getContext("2d");
+
+      matrixCanvas.width = window.innerWidth;
+      matrixCanvas.height = window.innerHeight;
+
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzضصقفغعهخحجچگکمنتالبیسشظزطرذدئو0123456789タテイスカンナニラゼ゜チトシハキクマノリレケツサソヒコミモネルメ@#$%^&*()_+{}[]|;:,.<>?";
+      const fontSize = 10;
+      const columns = matrixCanvas.width / fontSize;
+      const drops = [];
+
+      for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
+
+      function drawMatrix() {
+        matrixCtx.fillStyle = "rgba(10, 10, 10, 0.05)";
+        matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+        matrixCtx.fillStyle = "#1a8cff";
+        matrixCtx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          );
+          matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (
+            drops[i] * fontSize > matrixCanvas.height &&
+            Math.random() > 0.975
+          ) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      // Particles
+      const particlesCanvas = document.getElementById("particles-canvas");
+      const particlesCtx = particlesCanvas.getContext("2d");
+
+      particlesCanvas.width = window.innerWidth;
+      particlesCanvas.height = window.innerHeight;
+
+      const particles = [];
+      const particleCount = 100;
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * particlesCanvas.width;
+          this.y = Math.random() * particlesCanvas.height;
+          this.radius = Math.random() * 2;
+          this.speedX = Math.random() - 0.5;
+          this.speedY = Math.random() - 0.5;
+        }
+
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+
+          if (this.x < 0 || this.x > particlesCanvas.width) {
+            this.speedX = -this.speedX;
+          }
+          if (this.y < 0 || this.y > particlesCanvas.height) {
+            this.speedY = -this.speedY;
+          }
+        }
+
+        draw() {
+          particlesCtx.beginPath();
+          particlesCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          particlesCtx.fillStyle = "rgba(128, 128, 128, 0.5)";
+          particlesCtx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function updateParticles() {
+        particlesCtx.clearRect(
+          0,
+          0,
+          particlesCanvas.width,
+          particlesCanvas.height
+        );
+        particles.forEach((particle) => {
+          particle.update();
+          particle.draw();
         });
+      }
 
-        createBinaryRain();
+      // Cursor Trail
+      const cursorCanvas = document.getElementById("cursor-canvas");
+      const cursorCtx = cursorCanvas.getContext("2d");
 
-        console.log('%cCongratulations! You found a hidden message.', 'color: #FFD700; font-size: 20px; font-weight: bold;');
-        console.log('%cUser 106 approves of your curiosity!', 'color: #8A2BE2; font-size: 16px;');
+      cursorCanvas.width = window.innerWidth;
+      cursorCanvas.height = window.innerHeight;
 
-        document.querySelectorAll('.skill').forEach(skill => {
-            skill.addEventListener('mouseenter', () => {
-                skill.style.transform = 'translateY(-10px) scale(1.1)';
-                skill.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.3)';
-            });
-            skill.addEventListener('mouseleave', () => {
-                skill.style.transform = '';
-                skill.style.boxShadow = '';
-            });
+      const trail = [];
+      const trailLength = 10;
+
+      class TrailPoint {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.age = 0;
+          this.gravity = 0.5;
+          this.velocity = {
+            x: (Math.random() - 0.5) * 2,
+            y: Math.random() * 2 + 2,
+          };
+        }
+
+        update() {
+          this.x += this.velocity.x;
+          this.y += this.velocity.y;
+          this.velocity.y += this.gravity;
+          this.age++;
+        }
+      }
+
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      });
+
+      function drawTrail() {
+        cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+
+        // Add new trail point
+        if (
+          trail.length === 0 ||
+          Math.hypot(lastMouseX - trail[0].x, lastMouseY - trail[0].y) > 5
+        ) {
+          trail.unshift(new TrailPoint(lastMouseX, lastMouseY));
+          if (trail.length > trailLength) {
+            trail.pop();
+          }
+        }
+
+        // Draw trail
+        cursorCtx.beginPath();
+        trail.forEach((point, index) => {
+          point.update();
+          const alpha = 1 - index / trailLength;
+          cursorCtx.strokeStyle = `rgba(26, 140, 255, ${alpha})`;
+          cursorCtx.lineWidth = 2 * (1 - index / trailLength);
+          if (index === 0) {
+            cursorCtx.moveTo(point.x, point.y);
+          } else {
+            cursorCtx.lineTo(point.x, point.y);
+          }
         });
+        cursorCtx.stroke();
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        // Draw crosshair
+        cursorCtx.beginPath();
+        cursorCtx.moveTo(lastMouseX - 10, lastMouseY);
+        cursorCtx.lineTo(lastMouseX + 10, lastMouseY);
+        cursorCtx.moveTo(lastMouseX, lastMouseY - 10);
+        cursorCtx.lineTo(lastMouseX, lastMouseY + 10);
+        cursorCtx.strokeStyle = "#1a8cff";
+        cursorCtx.lineWidth = 2;
+        cursorCtx.stroke();
+      }
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+      function animate() {
+        drawMatrix();
+        updateParticles();
+        drawTrail();
+        requestAnimationFrame(animate);
+      }
 
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = '
+      animate();
+
+      // Resize event listener
+      window.addEventListener("resize", () => {
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        particlesCanvas.width = window.innerWidth;
+        particlesCanvas.height = window.innerHeight;
+        cursorCanvas.width = window.innerWidth;
+        cursorCanvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
