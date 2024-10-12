@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diva Discord Bot - Commands</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <header>
+        <!-- Header intentionally left empty as per design requirement -->
+    </header>
+
+    <div class="container">
+        <h2>Clean, Premium Commands</h2>
+
+        <div class="buttons">
+            <a href="index.html">Home</a>
+            <a href="tos.html">Terms of Service</a>
+        </div>
+
+        <!-- Moderation Commands -->
+        <div class="command-category">
+            <h3>Moderation Commands</h3>
+            <div class="commands">
+                <div class="command-box">
+                    <h4>kick &lt;user&gt; [reason]</h4>
+                    <p>Kicks a user from the server</p>
+                </div>
+                <div class="command-box">
+                    <h4>ban &lt;user&gt; [reason]</h4>
+                    <p>Bans a user from the server</p>
+                </div>
+                <div class="command-box">
+                    <h4>mute &lt;user&gt; &lt;duration&gt; [reason]</h4>
+                    <p>Mutes a user for a specified duration in minutes</p>
+                </div>
+                <div class="command-box">
+                    <h4>unmute &lt;user&gt;</h4>
+                    <p>Unmutes a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>clear &lt;amount&gt;</h4>
+                    <p>Clears a specified number of messages</p>
+                </div>
+                <div class="command-box">
+                    <h4>warn &lt;user&gt; [reason]</h4>
+                    <p>Warns a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>removewarn &lt;user&gt; &lt;warn_number&gt;</h4>
+                    <p>Removes a specific warning from a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>warnings &lt;user&gt;</h4>
+                    <p>Views warnings for a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>timeout &lt;user&gt; &lt;duration&gt; [reason]</h4>
+                    <p>Timeouts a user for a specified duration in minutes</p>
+                </div>
+                <div class="command-box">
+                    <h4>unban &lt;user_id&gt; [reason]</h4>
+                    <p>Unbans a user by their ID</p>
+                </div>
+                <div class="command-box">
+                    <h4>addverified &lt;user&gt;</h4>
+                    <p>Adds a user to the verified list</p>
+                </div>
+                <div class="command-box">
+                    <h4>setprefix &lt;new_prefix&gt;</h4>
+                    <p>Sets a new command prefix for the server</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Management Commands -->
+        <div class="command-category">
+            <h3>Role Management Commands</h3>
+            <div class="commands">
+                <div class="command-box">
+                    <h4>addrole &lt;user&gt; &lt;role&gt;</h4>
+                    <p>Adds a role to a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>removerole &lt;user&gt; &lt;role&gt;</h4>
+                    <p>Removes a role from a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>createrole &lt;name&gt; [color] [hoist]</h4>
+                    <p>Creates a new role</p>
+                </div>
+                <div class="command-box">
+                    <h4>deleterole &lt;role&gt;</h4>
+                    <p>Deletes a role</p>
+                </div>
+                <div class="command-box">
+                    <h4>roleinfo &lt;role&gt;</h4>
+                    <p>Displays information about a role</p>
+                </div>
+                <div class="command-box">
+                    <h4>serverroles</h4>
+                    <p>Lists all roles in the server</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Utility Commands -->
+        <div class="command-category">
+            <h3>Utility Commands</h3>
+            <div class="commands">
+                <div class="command-box">
+                    <h4>help</h4>
+                    <p>Shows this help message</p>
+                </div>
+                <div class="command-box">
+                    <h4>userinfo &lt;user&gt;</h4>
+                    <p>Displays information about a user</p>
+                </div>
+                <div class="command-box">
+                    <h4>serverinfo</h4>
+                    <p>Displays information about the server</p>
+                </div>
+                <div class="command-box">
+                    <h4>ping</h4>
+                    <p>Checks the bot's latency</p>
+                </div>
+                <div class="command-box">
+                    <h4>invite</h4>
+                    <p>Gets the bot's invite link</p>
+                </div>
+                <div class="command-box">
+                    <h4>avatar &lt;user&gt;</h4>
+                    <p>Displays a user's avatar</p>
+                </div>
+                <div class="command-box">
+                    <h4>poll &lt;question&gt; [options...]</h4>
+                    <p>Creates a poll with up to 10 options</p>
+                </div>
+                <div class="command-box">
+                    <h4>echo &lt;message&gt;</h4>
+                    <p>Echoes the message back</p>
+                </div>
+                <div class="command-box">
+                    <h4>image &lt;query&gt;</h4>
+                    <p>Fetches an image based on the query</p>
+                </div>
+                <div class="command-box">
+                    <h4>youtube &lt;link&gt;</h4>
+                    <p>Checks for a YouTube video link</p>
+                </div>
+                <div class="command-box">
+                    <h4>download &lt;url&gt;</h4>
+                    <p>Downloads content from a URL or YouTube video</p>
+                </div>
+                <div class="command-box">
+                    <h4>execute &lt;code&gt;</h4>
+                    <p>Executes the provided code (admin only)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Commands -->
+        <div class="command-category">
+            <h3>Fun Commands</h3>
+            <div class="commands">
+                <div class="command-box">
+                    <h4>coinflip</h4>
+                    <p>Simulates flipping a coin</p>
+                </div>
+                <div class="command-box">
+                    <h4>roll</h4>
+                    <p>Rolls a virtual dice</p>
+                </div>
+                <div class="command-box">
+                    <h4>joke</h4>
+                    <p>Tells a random joke</p>
+                </div>
+                <div class="command-box">
+                    <h4>quote</h4>
+                    <p>Shares a random inspirational quote</p>
+                </div>
+                <div class="command-box">
+                    <h4>meme</h4>
+                    <p>Fetches a random meme</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle Background
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const numberOfParticles = 200; /* Further increased for better visibility */
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = 'rgba(160,32,240, 0.8)'; /* Purple Color */
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; /* Slightly higher opacity for better trail */
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particlesArray) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Resize Canvas on Window Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray.length = 0;
+            init();
+        });
+    </script>
+</body>
+</html>

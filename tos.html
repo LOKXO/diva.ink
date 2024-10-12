@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diva Discord Bot - Terms of Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <header>
+        <!-- Header intentionally left empty as per design requirement -->
+    </header>
+
+    <div class="container">
+        <h2>Terms of Service</h2>
+
+        <div class="buttons">
+            <a href="index.html">Home</a>
+            <a href="commands.html">Commands</a>
+        </div>
+
+        <div class="command-category">
+            <div class="commands">
+                <div class="command-box">
+                    <h4>1. Acceptance of Terms</h4>
+                    <p>By using the Diva Discord Bot, you agree to comply with and be bound by these Terms of Service. If you do not agree, please do not use the bot.</p>
+                </div>
+                <div class="command-box">
+                    <h4>2. Use of the Bot</h4>
+                    <p>Diva is designed to enhance your Discord server through moderation, role management, utilities, and fun commands. You agree to use the bot responsibly and not engage in any activities that may disrupt the server or violate Discord's Community Guidelines.</p>
+                </div>
+                <div class="command-box">
+                    <h4>3. Prohibited Activities</h4>
+                    <p>You agree not to engage in the following activities while using Diva:</p>
+                    <ul>
+                        <li>Attempting to hack, reverse engineer, or otherwise exploit vulnerabilities in the bot.</li>
+                        <li>Using the bot to distribute spam, malware, or other malicious content.</li>
+                        <li>Engaging in harassment, hate speech, or any form of discrimination.</li>
+                        <li>Abusing the bot's commands to disrupt server operations.</li>
+                    </ul>
+                </div>
+                <div class="command-box">
+                    <h4>4. Privacy</h4>
+                    <p>Diva collects certain information to function effectively. We are committed to protecting your privacy and will not share your data with third parties without consent.</p>
+                </div>
+                <div class="command-box">
+                    <h4>5. Termination</h4>
+                    <p>We reserve the right to suspend or terminate your access to the bot at our discretion, especially in cases of violation of these Terms of Service.</p>
+                </div>
+                <div class="command-box">
+                    <h4>6. Changes to Terms</h4>
+                    <p>We may update these Terms of Service from time to time. Continued use of the bot signifies your acceptance of any changes.</p>
+                </div>
+                <div class="command-box">
+                    <h4>7. Limitation of Liability</h4>
+                    <p>The developers are not liable for any damages arising from the use or inability to use the bot.</p>
+                </div>
+                <div class="command-box">
+                    <h4>8. Contact</h4>
+                    <p>If you have any questions regarding these Terms of Service, please contact us through our support channels.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle Background
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const numberOfParticles = 200; /* Increased number for better visibility */
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = 'rgba(160,32,240, 0.8)'; /* Purple Color */
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; /* Slightly higher opacity for better trail */
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particlesArray) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Resize Canvas on Window Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray.length = 0;
+            init();
+        });
+    </script>
+</body>
+</html>

@@ -1,557 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DIVA</title>
-    die
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Mono&family=Roboto+Mono&family=Fira+Code&family=Source+Code+Pro&family=Ubuntu+Mono&display=swap");
+<head>
+    <meta charset="UTF-8">
+    <title>Diva Discord Bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
 
-      :root {
-        --primary-color: #1a8cff;
-        --secondary-color: #0a0a0a;
-        --accent-color: #8a2be2;
-        --text-color: #e6e6e6;
-        --glow-color: rgba(138, 43, 226, 0.8);
-        --header-glow-color: #8a2be2;
-        --diva-meaning-color: #ff3399;
-      }
+    <header>
+        <!-- Header intentionally left empty as per design requirement -->
+    </header>
 
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        font-family: "Space Mono", monospace;
-        color: var(--text-color);
-        line-height: 1.6;
-        cursor: none;
-        overflow-x: hidden;
-        background-color: transparent;
-        position: relative;
-      }
-
-      #matrix-canvas,
-      #particles-canvas,
-      #cursor-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-
-      #matrix-canvas {
-        z-index: -3;
-      }
-      #particles-canvas {
-        z-index: -2;
-      }
-      #cursor-canvas {
-        z-index: 9999;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 40px 20px;
-        position: relative;
-        z-index: 1;
-      }
-
-      #title-container {
-        height: 6vw;
-        margin-bottom: 20px;
-      }
-
-      #animated-title {
-        font-family: "Orbitron", sans-serif;
-        font-size: 5vw;
-        text-align: center;
-        text-transform: uppercase;
-        position: relative;
-        color: var(--accent-color);
-        text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color),
-          0 0 45px var(--glow-color), 0 0 60px var(--glow-color),
-          0 0 90px var(--glow-color), 0 0 105px var(--glow-color),
-          0 0 120px var(--glow-color), 0 0 180px var(--glow-color);
-        animation: pulsate 2s infinite alternate;
-      }
-
-      @keyframes pulsate {
-        100% {
-          text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color),
-            0 0 30px var(--glow-color), 0 0 40px var(--glow-color),
-            0 0 60px var(--glow-color), 0 0 70px var(--glow-color),
-            0 0 80px var(--glow-color), 0 0 100px var(--glow-color);
-        }
-      }
-
-      #animated-title span {
-        display: inline-block;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.5s ease;
-      }
-
-      #animated-title span.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .glow {
-        text-shadow: 0 0 4px var(--glow-color), 0 0 8px var(--glow-color),
-          0 0 12px var(--glow-color);
-      }
-
-      h2 {
-        font-size: 1.4em;
-        margin-top: 40px;
-        color: var(--accent-color);
-        font-family: "Orbitron", sans-serif;
-        text-shadow: 0 0 6px var(--header-glow-color),
-          0 0 12px var(--header-glow-color), 0 0 18px var(--header-glow-color);
-      }
-
-      p,
-      .code-block {
-        font-size: 1.1em;
-        margin-bottom: 25px;
-        transition: all 0.5s ease;
-        animation: fadeIn 1.5s ease-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      p:hover,
-      .code-block:hover {
-        transform: scale(1.03);
-        filter: brightness(1.2);
-      }
-
-      .code-block {
-        background-color: rgba(26, 26, 26, 0.9);
-        border-left: 4px solid var(--primary-color);
-        padding: 20px;
-        margin-bottom: 30px;
-        overflow-x: auto;
-        border-radius: 8px;
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      #diva-meaning {
-        font-size: 1.4em;
-        text-align: center;
-        margin-bottom: 40px;
-        color: var(--diva-meaning-color);
-        text-shadow: 0 0 6px var(--diva-meaning-color),
-          0 0 12px var(--diva-meaning-color), 0 0 18px var(--diva-meaning-color);
-        animation: pulse 3s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.08);
-        }
-      }
-
-      .arsenal-item {
-        margin-bottom: 12px;
-        font-weight: bold;
-        text-shadow: 0 0 5px currentColor;
-        transition: all 0.4s ease;
-        padding: 8px;
-        border-radius: 5px;
-        background-color: rgba(26, 26, 26, 0.6);
-        font-size: 0.9em;
-      }
-
-      .arsenal-item:hover {
-        transform: translateX(15px) scale(1.05);
-        filter: brightness(1.3);
-        box-shadow: 0 0 15px currentColor;
-      }
-
-      .arsenal-item:nth-child(1) {
-        color: #3a9bdc;
-        font-family: "Roboto Mono", monospace;
-      }
-      .arsenal-item:nth-child(2) {
-        color: #4ecdc4;
-        font-family: "Fira Code", monospace;
-      }
-      .arsenal-item:nth-child(3) {
-        color: #45b7d1;
-        font-family: "Source Code Pro", monospace;
-      }
-      .arsenal-item:nth-child(4) {
-        color: #5cd85a;
-        font-family: "Ubuntu Mono", monospace;
-      }
-      .arsenal-item:nth-child(5) {
-        color: #f7b731;
-        font-family: "Space Mono", monospace;
-      }
-      .arsenal-item:nth-child(6) {
-        color: #ff7eb6;
-        font-family: "Orbitron", sans-serif;
-      }
-      .arsenal-item:nth-child(7) {
-        color: #9b59b6;
-        font-family: "Roboto Mono", monospace;
-      }
-
-      @media (max-width: 768px) {
-        #animated-title {
-          font-size: 8vw;
-        }
-        #title-container {
-          height: 8vw;
-        }
-        h2 {
-          font-size: 1.2em;
-        }
-        body,
-        html {
-          cursor: auto;
-        }
-        #cursor-canvas {
-          display: none;
-        }
-      }
-
-      .glow-center {
-        text-align: center;
-        color: #e6e6e6;
-        text-shadow: 0 0 8px rgba(200, 220, 255, 0.5),
-          0 0 15px rgba(200, 220, 255, 0.3), 0 0 25px rgba(200, 220, 255, 0.2);
-        font-size: 1.2em;
-        margin: 30px 0;
-        font-weight: 400;
-        letter-spacing: 2px;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="matrix-canvas"></canvas>
-    <canvas id="particles-canvas"></canvas>
-    <canvas id="cursor-canvas"></canvas>
     <div class="container">
-      <div id="title-container">
-        <div id="animated-title"></div>
-      </div>
-      <div id="diva-meaning" class="glow">
-        Digital Intrusion Vulnerability Analysis
-      </div>
-
-      <p class="glow-center">Decompiling malware since 2021!</p>
-
-      <h2 class="glow">What I Do</h2>
-      <p class="glow">
-        As a malware analyst, I decompile, find and/or expose malware. I do it
-        for fun and I do <strong>NOT</strong>
-        accept donations.
-      </p>
-
-      <h2
-        class="glow"
-        style="
-          font-size: 1.2em;
-          font-family: 'Orbitron', sans-serif;
-          color: #1a8cff;
-        "
-      >
-        Arsenal
-      </h2>
-      <div class="code-block">
-        <div class="arsenal-item">IDA Pro - Advanced Disassembler</div>
-        <div class="arsenal-item">Ghidra - Reverse Engineering Suite</div>
-        <div class="arsenal-item">x64dbg - Windows Debugger</div>
-        <div class="arsenal-item">Wireshark - Network Protocol Analyzer</div>
-        <div class="arsenal-item">Custom Python Scripts - Automation Tools</div>
-        <div class="arsenal-item">
-          DnSpy - .NET Debugger and Assembly Editor
+        <div class="main">
+            <img src="p.webp" alt="Diva Bot Image">
+            <h1>Clean, Premium</h1>
+            <p>Diva is your ultimate Discord bot, crafted to provide top-tier moderation tools, seamless role management, versatile utilities, and engaging fun commands to elevate your server experience.</p>
+            <div class="buttons">
+                <a href="https://discord.com/oauth2/authorize?client_id=1294242585275007008&scope=bot&permissions=8" target="_blank">Invite</a>
+                <a href="commands.html">Commands</a>
+                <a href="tos.html">TOS</a>
+            </div>
+            <!-- Loader removed as per request -->
         </div>
-        <div class="arsenal-item">
-          VM Farm & MITM Proxy - Controlled Environment
-        </div>
-      </div>
-
-      <h2
-        class="glow"
-        style="
-          font-size: 1.2em;
-          font-family: 'Orbitron', sans-serif;
-          color: #ff3399;
-        "
-      >
-        To my fellow skids
-      </h2>
-      <p class="glow" style="font-size: 1em">
-        GET A FUCKING JOB, FIND YOUR DAD, DRINK SOME MILK AND KYS
-      </p>
     </div>
 
     <script>
-      const title = document.getElementById("animated-title");
-      const sequences = ["D1V4", "DIVA", "4V1D", "AVID", ""];
-      let currentSequence = 0;
-      let currentChar = 0;
-      let isDeleting = false;
+        // Particle Background
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
 
-      function animateTitle() {
-        const currentText = sequences[currentSequence];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        if (!isDeleting && currentChar <= currentText.length) {
-          title.innerHTML = currentText
-            .slice(0, currentChar)
-            .split("")
-            .map((char) => `<span class="visible glow">${char}</span>`)
-            .join("");
-          currentChar++;
-          document.title = currentText.slice(0, currentChar);
-        } else if (isDeleting && currentChar >= 0) {
-          title.innerHTML = currentText
-            .slice(0, currentChar)
-            .split("")
-            .map((char) => `<span class="visible glow">${char}</span>`)
-            .join("");
-          currentChar--;
-          document.title = currentText.slice(0, currentChar) || "DIVA";
-        } else {
-          isDeleting = !isDeleting;
-          if (!isDeleting) {
-            currentSequence = (currentSequence + 1) % sequences.length;
-          }
+        const particlesArray = [];
+        const numberOfParticles = 150; /* Increased number for better visibility */
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = 'rgba(160,32,240, 0.8)'; /* Purple Color */
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        const speed = isDeleting ? 100 : 200;
-        setTimeout(animateTitle, speed);
-      }
-
-      animateTitle();
-
-      const matrixCanvas = document.getElementById("matrix-canvas");
-      const matrixCtx = matrixCanvas.getContext("2d");
-      const particlesCanvas = document.getElementById("particles-canvas");
-      const particlesCtx = particlesCanvas.getContext("2d");
-      const cursorCanvas = document.getElementById("cursor-canvas");
-      const cursorCtx = cursorCanvas.getContext("2d");
-
-      function resizeCanvases() {
-        matrixCanvas.width =
-          particlesCanvas.width =
-          cursorCanvas.width =
-            window.innerWidth;
-        matrixCanvas.height =
-          particlesCanvas.height =
-          cursorCanvas.height =
-            window.innerHeight;
-      }
-
-      resizeCanvases();
-
-      const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}[]|;:,.<>?";
-      const fontSize = 12;
-      const columns = matrixCanvas.width / fontSize;
-      const drops = new Array(columns).fill(1);
-
-      function drawMatrix() {
-        matrixCtx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-        matrixCtx.fillStyle = "#1a8cff";
-        matrixCtx.font = fontSize + "px monospace";
-
-        for (let i = 0; i < drops.length; i++) {
-          const text =
-            characters[Math.floor(Math.random() * characters.length)];
-          matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (
-            drops[i] * fontSize > matrixCanvas.height &&
-            Math.random() > 0.99
-          ) {
-            drops[i] = 0;
-          }
-          drops[i] += 0.5;
-        }
-      }
-
-      const particles = [];
-      const particleCount = 50;
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * particlesCanvas.width;
-          this.y = Math.random() * particlesCanvas.height;
-          this.radius = Math.random() * 3;
-          this.speedX = (Math.random() - 0.5) * 0.5;
-          this.speedY = (Math.random() - 0.5) * 0.5;
+        function init() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
         }
 
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-
-          if (this.x < 0 || this.x > particlesCanvas.width)
-            this.speedX = -this.speedX;
-          if (this.y < 0 || this.y > particlesCanvas.height)
-            this.speedY = -this.speedY;
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let particle of particlesArray) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animate);
         }
 
-        draw() {
-          particlesCtx.beginPath();
-          particlesCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          particlesCtx.fillStyle = "rgba(138, 43, 226, 0.6)";
-          particlesCtx.fill();
-        }
-      }
+        init();
+        animate();
 
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-
-      function updateParticles() {
-        particlesCtx.clearRect(
-          0,
-          0,
-          particlesCanvas.width,
-          particlesCanvas.height
-        );
-        particles.forEach((particle) => {
-          particle.update();
-          particle.draw();
+        // Resize Canvas on Window Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray.length = 0;
+            init();
         });
-      }
-
-      const trail = [];
-      const trailLength = 15;
-
-      class TrailPoint {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.age = 0;
-          this.gravity = 0.3;
-          this.velocity = {
-            x: (Math.random() - 0.5) * 1.5,
-            y: Math.random() * 1.5 + 1.5,
-          };
-        }
-
-        update() {
-          this.x += this.velocity.x;
-          this.y += this.velocity.y;
-          this.velocity.y += this.gravity;
-          this.age++;
-        }
-      }
-
-      let lastMouseX = 0;
-      let lastMouseY = 0;
-
-      document.addEventListener("mousemove", (e) => {
-        lastMouseX = e.clientX;
-        lastMouseY = e.clientY;
-      });
-
-      function drawTrail() {
-        cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-
-        if (
-          trail.length === 0 ||
-          Math.hypot(lastMouseX - trail[0].x, lastMouseY - trail[0].y) > 5
-        ) {
-          const newPoint = new TrailPoint(lastMouseX, lastMouseY);
-          newPoint.velocity.y += 0.5;
-          trail.unshift(newPoint);
-          if (trail.length > trailLength) {
-            trail.pop();
-          }
-        }
-
-        trail.forEach((point) => {
-          point.velocity.y += 0.1;
-          point.y += point.velocity.y;
-        });
-
-        cursorCtx.beginPath();
-        const crosshairSize = 6;
-        const glowSize = 2;
-
-        cursorCtx.shadowColor = "rgba(26, 140, 255, 0.6)";
-        cursorCtx.shadowBlur = glowSize;
-
-        cursorCtx.strokeStyle = "#1a8cff";
-        cursorCtx.lineWidth = 1.5;
-        cursorCtx.moveTo(lastMouseX - crosshairSize, lastMouseY);
-        cursorCtx.lineTo(lastMouseX + crosshairSize, lastMouseY);
-        cursorCtx.moveTo(lastMouseX, lastMouseY - crosshairSize);
-        cursorCtx.lineTo(lastMouseX, lastMouseY + crosshairSize);
-        cursorCtx.stroke();
-
-        cursorCtx.beginPath();
-        cursorCtx.arc(lastMouseX, lastMouseY, 1.5, 0, Math.PI * 2);
-        cursorCtx.fillStyle = "#ffffff";
-        cursorCtx.fill();
-
-        cursorCtx.shadowColor = "transparent";
-        cursorCtx.shadowBlur = 0;
-
-        const gradient = cursorCtx.createRadialGradient(
-          lastMouseX,
-          lastMouseY,
-          0,
-          lastMouseX,
-          lastMouseY,
-          crosshairSize + glowSize
-        );
-        gradient.addColorStop(0, "rgba(26, 140, 255, 0.4)");
-        gradient.addColorStop(1, "rgba(26, 140, 255, 0)");
-        cursorCtx.fillStyle = gradient;
-        cursorCtx.arc(
-          lastMouseX,
-          lastMouseY,
-          crosshairSize + glowSize,
-          0,
-          Math.PI * 2
-        );
-        cursorCtx.fill();
-      }
-
-      function animate() {
-        drawMatrix();
-        updateParticles();
-        drawTrail();
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-
-      window.addEventListener("resize", () => {
-        matrixCanvas.width = window.innerWidth;
-        matrixCanvas.height = window.innerHeight;
-        particlesCanvas.width = window.innerWidth;
-        particlesCanvas.height = window.innerHeight;
-        cursorCanvas.width = window.innerWidth;
-        cursorCanvas.height = window.innerHeight;
-      });
     </script>
-  </body>
+</body>
 </html>
