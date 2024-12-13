@@ -1,0 +1,3 @@
+# Hide sigma folder contents while allowing HTML includes
+sigma/*
+!sigma/*.html
