@@ -1,118 +1,304 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Diva Discord Bot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link to your CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Removed Font Awesome as custom SVGs are being used -->
-</head>
-<body>
-    <canvas id="particleCanvas"></canvas>
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Exotic - Digital Phantom</title>
+        <meta name="description" content="A mysterious young developer crafting digital experiences from the shadows." />
+        <link rel="icon" href="https://i.imgur.com/YZ5t6J8.png" type="image/png" sizes="any" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --background-color: #000000;
+                --background-gradient: linear-gradient(135deg, #000000 0%, #0a0000 50%, #000000 100%);
+                --nav-background: rgba(0, 0, 0, 0.98);
+                --primary-color: #800000;
+                --secondary-color: #ffffff;
+                --accent-color: #800000;
+                --text-color: #ffffff;
+                --text-muted: #666666;
+                --glow-color: rgba(128, 0, 0, 0.4);
+            }
 
-    <header>
-        <!-- Header intentionally left empty as per design requirement -->
-    </header>
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
 
-    <div class="container">
-        <div class="main">
-            <img src="p.webp" alt="Diva Bot Image">
-            <h1>Clean, Premium</h1>
-            <p>Diva is your ultimate Discord bot, crafted to provide top-tier moderation tools, seamless role management, versatile utilities, and engaging fun commands to elevate your server experience.</p>
-            <div class="buttons">
-                <!-- Commands Button with Custom SVG Icon -->
-                <a href="commands.html" aria-label="Cmds">
-                    <!-- Custom SVG Icon for Commands -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="custom-icon" aria-hidden="true">
-                        <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
-                    </svg>
-                    Commands
+            @keyframes float {
+                0% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(5deg); }
+                100% { transform: translateY(0px) rotate(0deg); }
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); opacity: 0.5; }
+                50% { transform: scale(1.1); opacity: 1; }
+                100% { transform: scale(1); opacity: 0.5; }
+            }
+
+            @keyframes glitch {
+                0% { clip-path: inset(50% 0 30% 0); transform: skew(-5deg); }
+                20% { clip-path: inset(20% 0 60% 0); transform: skew(5deg); }
+                40% { clip-path: inset(40% 0 40% 0); transform: skew(-5deg); }
+                60% { clip-path: inset(80% 0 5% 0); transform: skew(5deg); }
+                80% { clip-path: inset(10% 0 85% 0); transform: skew(-5deg); }
+                100% { clip-path: inset(40% 0 50% 0); transform: skew(5deg); }
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: var(--background-gradient);
+                color: var(--text-color);
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+                cursor: crosshair;
+            }
+
+            nav {
+                background: var(--nav-background);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 100;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-bottom: 2px solid var(--primary-color);
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 6rem 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+                animation: pulse 4s infinite;
+            }
+
+            .hero-content {
+                text-align: center;
+                z-index: 1;
+                max-width: 800px;
+                animation: shake 5s infinite;
+            }
+
+            .avatar {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 3px solid var(--primary-color);
+                box-shadow: 0 0 30px var(--glow-color);
+                margin-bottom: 2rem;
+                animation: float 6s ease-in-out infinite;
+                filter: grayscale(80%);
+                object-fit: cover; /* Added to ensure image fits properly */
+            }
+
+            h1 {
+                font-size: 4.5rem;
+                margin: 0;
+                background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                position: relative;
+                text-shadow: 0 0 20px var(--glow-color);
+            }
+
+            h1::before {
+                content: attr(data-text);
+                position: absolute;
+                left: 2px;
+                text-shadow: -2px 0 var(--accent-color);
+                top: 0;
+                color: var(--text-color);
+                background: none;
+                clip-path: rect(44px, 450px, 56px, 0);
+                animation: glitch 5s infinite linear alternate-reverse;
+            }
+
+            .description {
+                font-size: 1.2rem;
+                line-height: 1.8;
+                color: var(--text-muted);
+                margin: 2rem 0;
+                text-shadow: 0 0 5px var(--text-color);
+            }
+
+            .skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+                margin: 2rem 0;
+            }
+
+            .skill-tag {
+                background: rgba(128, 0, 0, 0.2);
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                backdrop-filter: blur(5px);
+                border: 1px solid var(--primary-color);
+                transition: all 0.3s ease;
+                text-shadow: 0 0 5px var(--secondary-color);
+                box-shadow: 0 0 15px var(--glow-color);
+            }
+
+            .skill-tag:hover {
+                transform: translateY(-5px) rotate(5deg);
+                box-shadow: 0 5px 15px var(--glow-color);
+                background: var(--primary-color);
+            }
+
+            footer {
+                background: var(--nav-background);
+                padding: 2rem;
+                text-align: center;
+                margin-top: auto;
+                border-top: 2px solid var(--primary-color);
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            .social-links a {
+                margin: 0 15px;
+                text-decoration: none;
+                color: var(--text-color);
+                font-size: 1.2rem;
+                transition: all 0.3s ease;
+                display: inline-flex; /* Added to improve alignment */
+                align-items: center; /* Added to improve alignment */
+            }
+
+            .social-links a:hover {
+                color: var(--primary-color);
+            }
+
+            .social-links img {
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+                margin-right: 5px;
+                filter: invert(1); /* Changed to make icons visible on dark background */
+            }
+
+            #music-controls {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 1000;
+                background: rgba(128, 0, 0, 0.2);
+                padding: 10px;
+                border-radius: 50%;
+                cursor: pointer;
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            #music-controls img {
+                filter: invert(1); /* Added to make music control icon visible */
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 3rem;
+                }
+
+                .hero {
+                    padding: 4rem 1rem;
+                }
+
+                .avatar {
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+        </style>
+    </head>
+    
+    <body>
+        <section class="hero">
+            <div class="hero-content">
+                <img src="2.png" alt="Exotic Avatar" class="avatar" onerror="this.src='https://via.placeholder.com/200'">
+                <h1 data-text="EXOTIC">EXOTIC</h1>
+                <p class="description">
+                    Digital architect and security enthusiast crafting innovative solutions in the cyber realm. 
+                    Specializing in secure application development and penetration testing.
+                </p>
+                <div class="skills">
+                    <span class="skill-tag">Cybersecurity</span>
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Web Development</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 Exotic | Digital Phantom</p>
+            <div class="social-links">
+                <a href="https://github.com/lokxo" target="_blank">
+                    <img src="git.png" alt="GitHub" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">GitHub
                 </a>
-                <!-- Invite Button with Custom SVG Icon -->
-                <a href="https://discord.com/oauth2/authorize?client_id=1294242585275007008&scope=bot&permissions=8" target="_blank" aria-label="Invite">
-                    <!-- Custom SVG Icon for Invite -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="custom-icon" aria-hidden="true">
-                        <path d="M320 0c17.7 0 32 14.3 32 32l0 64 120 0c39.8 0 72 32.2 72 72l0 272c0 39.8-32.2 72-72 72l-304 0c-39.8 0-72-32.2-72-72l0-272c0-39.8 32.2-72 72-72l120 0 0-64c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0zM264 256a40 40 0 1 0-80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224l16 0 0 192-16 0c-26.5 0-48-21.5-48-48l0-96c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-16 0 0-192 16 0z"/>
-                    </svg>
-                    Invite
-                </a>
-                <!-- TOS Button with Custom SVG Icon -->
-                <a href="tos.html" aria-label="Terms of Service">
-                    <!-- Custom SVG Icon for TOS -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="custom-icon" aria-hidden="true">
-                        <path d="M64 144a48 48 0 1 0 0-96 48 48 0 1 0 0 96zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM192 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM64 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm48-208a48 48 0 1 0-96 0 48 48 0 1 0 96 0z"/>
-                    </svg>
-                    TOS
+                <a href="https://discord.com/users/1275746220807290880" target="_blank">
+                    <img src="dis.png" alt="Discord" onerror="this.src='https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png'">Discord
                 </a>
             </div>
-            <!-- Loader removed as per request -->
+        </footer>
+
+        <div id="music-controls">
+            <img src="cir.png" alt="Music" width="30" height="30" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04IDh6Ii8+PHBhdGggZD0iTTEwIDcuNXY5bDYtNC41LTYtNC41eiIvPjwvc3ZnPg=='">
         </div>
-    </div>
 
-    <script>
-        // Particle Background
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+        <audio id="background-music" loop preload="auto">
+            <source src="2.mp3" type="audio/mpeg">
+            <source src="2.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        <script>
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
 
-        const particlesArray = [];
-        const numberOfParticles = 150; /* Increased number for better visibility */
+            // Music controls
+            const musicControls = document.getElementById('music-controls');
+            const backgroundMusic = document.getElementById('background-music');
+            let isPlaying = false;
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = 'rgba(160,32,240, 0.8)'; /* Purple Color */
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for (let particle of particlesArray) {
-                particle.update();
-                particle.draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        // Resize Canvas on Window Resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particlesArray.length = 0;
-            init();
-        });
-    </script>
-</body>
-</html>
+            musicControls.addEventListener('click', () => {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    musicControls.style.opacity = '0.5';
+                } else {
+                    backgroundMusic.play();
+                    musicControls.style.opacity = '1';
+                }
+                isPlaying = !isPlaying;
+            });
+        </script>
+    </body>
+    </html>
